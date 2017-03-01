@@ -1,0 +1,28 @@
+version: "2.0"  
+services:
+  onewire: 
+    image: wesleycharlesblake/onewire-temp
+    environment:
+     - SENSOR='/sys/bus/w1/devices/28-0315906e8dff/w1_slave'    
+  influx:
+    image: influxdb
+    ports:
+     - "8083:8083"
+     - "8086:8086"
+    environment:
+     - INFLUXDB_USER=root
+     - INFLUXDB_PASS=root
+     - INFLUXDB_NAME=brewday
+     - PRE_CREATE_DB="brewday"
+  grafana:
+    image: grafana/grafana
+    environment:
+     - INFLUXDB_USER=root
+     - INFLUXDB_PASS=J*E2<PTJcNc4
+     - INFLUXDB_NAME=brewday
+    ports:
+     - "3000:3000"
+    links:
+     - influx
+    depends_on:
+     - influx
