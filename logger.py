@@ -2,12 +2,13 @@ import os
 import time
 from influxdb import InfluxDBClient
 
-influx_host = os.getenv("INFLUX_HOST")
+influx_host = '192.168.0.5'
+host = 'some-hostname'
 port = 8086
-dbname = os.getenv("INFLUXDB_NAME")
-user = os.getenv("INFLUXDB_USER")
-password = os.getenv("INFLUXDB_PASS")
-temp_sensor = os.environ.get("SENSOR")
+dbname = 'dname'
+user = 'user'
+password = 'pass'
+temp_sensor = '/sys/bus/w1/devices/28-0315906e8dff/w1_slave'
 
 client = InfluxDBClient(influx_host, port, user, password, dbname)
 client.create_database(dbname)
@@ -36,7 +37,6 @@ def read_temp():
 
 def get_data_points():
     temperature = read_temp()
-
     iso = time.ctime()
     json_body = [
             {
@@ -45,7 +45,6 @@ def get_data_points():
                 "time": iso,
                 "fields": {
                     "value": temperature,
-                    "val": float(temperature)
                     }
                 }
 
@@ -57,5 +56,5 @@ def get_data_points():
 while True:
     json_body = get_data_points()
     client.write_points(json_body)
-    print (".")
-    time.sleep(sleep_time)
+    print (json_body)
+    time.sleep(1)
