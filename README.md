@@ -24,7 +24,7 @@ password = 'pass'
 temp_sensor = '/sys/bus/w1/devices/28-0315906e8dff/w1_slave'
 ``` 
 
-You can then import the [grafana-dashboard.json](https://github.com/WesleyCharlesBlake/raspberry-pi-temperature/blob/master/grafana-dashboard.json) from your grafana instance, and be able see the temp stats from your RPi! The dashboard is simple with a time graph, and s single stat gauge for near real time temp. I have also greated some alerts when temperatures are outside of a specified range
+You can then import the [grafana-dashboard.json](https://github.com/WesleyCharlesBlake/raspberry-pi-temperature/blob/master/grafana-dashboard.json) from your grafana instance, and be able see the temp stats from your RPi! The dashboard is simple with a time graph, and a single stat gauge for near real time temp. I have also greated some alerts when temperatures are outside of a specified range
 
 I use this in my home brewing rig, to monitor mash temperatures, and alert me when mash temp has deviated too much from the desired mash mash temperature. 
 
